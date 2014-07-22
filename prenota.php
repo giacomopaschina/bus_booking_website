@@ -96,10 +96,15 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
                         <h2 >Book a Bus</h2>
                     </div>
                     </div>
-                <div class=" col-sm-5  ">
+                <div id="timetables" class=" col-sm-5  ">
+                    <form id ="formtime"  action="#"class="form ">
                      <div class="  selectpicker modal-content ">
+                          <div class="modal-header" id="timetitle">
+                <h3 class="text-center" >Timetable</h3>
+            </div>
                          <div class="modal-body">
-                      <select id="direction" class="btn  btn-primary ">
+                      <select id="direction" class="btn   btn-primary btn-lg btn-block " >
+
             <option value="" >--Select--</option>
       
             <option  value ="0"> From Bolzaneto to Morego   </option>
@@ -109,17 +114,36 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
                                           
       
                        </select>
-                    </div>
-                        <div class=" selectpicker ">
-                      <select id="time" class="btn  btn-primary " style="visibility: hidden;" >
+                      <select id="time" class="btn  btn-primary btn-lg btn-block " style="visibility: hidden;" >
 
-                      </select></div>
-                         <div class="selectpicker">
-                             <input  type="text" style="visibility: hidden;"   id="date">
-
-                         </div>
+                      </select>
+                             <input  type="date"  class="btn-lg btn-block btn  btn-primary " style="visibility: hidden;"    id="date">
+                             <br>
+                         <div >
+              <input type="submit" id="book_btn" value="Search"  class="btn btn-primary btn-lg btn-block">
+                   </div>
                      </div>
-                 </div></div>
+                     </div> </form></div>
+                <div class="col-sm-7" >
+                    <div id="busdiv" class="  modal-content ">
+                        <div class="modal-header" id="timetitle">
+                <h3 class="text-center" >Seats</h3>
+            </div>
+
+                         <div class="modal-body" id="busseat">
+ 
+
+                     </div>
+                     </div> 
+                </div>
+
+                    <div class=" col-md-12">
+                        <a href=" " class="btn btn-primary btn-lg btn-block" style="margin-top: 70px;"id="finalpren">Book </a>
+                    </div>
+            
+            
+                               </div>
+
                         
            
              
@@ -176,8 +200,13 @@ $("#logout").click(function(){
         }); 
         
   //     $("#form2").ajaxForm({url: 'login.php', type: 'post'});
+window.onload = function ()
+{
+ var mydiv = document.getElementById("timetables");
+    var curr_height= parseInt(mydiv.offsetHeight); // removes the "px" at the end
+   $("#busdiv").css({height: curr_height +'px'})
 
-   
+}
   $('#direction').change(function(){
               var index=$("#direction option:selected").index();
               if(index===0)
@@ -204,7 +233,7 @@ $("#logout").click(function(){
            
         }); 
          $('#time').change(function(){
-              var index=$("#direction option:selected").index();
+              var index=$("#time option:selected").index();
               var d=new Date();
               if(index===0)
               {
@@ -212,44 +241,50 @@ $("#logout").click(function(){
               }
               else
               {
-                  $('#date').datepicker({
-        format: "dd-mm-yyyy",
-        startDate: d,
-        endDate: "01-01-2015",
-        todayBtn: "linked",
-        autoclose: true,
-        todayHighlight: true
-    })          
+                  
                    $("#date").css("visibility","visible");
                    
-                    $.ajax({
-                type: "POST",
-                url: "bus.php",
-                data: "val=" + index,
-                success: function(response){
-        $("#divbus").html(response);
-                    
-                }
-            });
+//                    $.ajax({
+//                type: "POST",
+//                url: "bus.php",
+//                data: "val=" + index,
+//                success: function(response){
+//        $("#busdiv").html(response);
+//                    
+//                }
+//            });
                
         }
                           
                 
            
         }); 
-//              $('#form2').submit(function(){
-//     $.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
-//                
-//              $.ajax({
-//                type: "POST",
-//                url: "verify.php",
-//                data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&surname="+ $("#email").val()+"&psw="+ $("#psw").val(),
-//                success: function(response){
-//                }
-//            });
+        
+              $('#formtime').submit(function(){
+                              var index=$("#direction option:selected").val();
+                              var time= $("#time option:selected").val();
+//                              alert(time);
+//                              alert (index);
+//                              alert($("#date").val());
+   // $.post('bus.php', { date: $("#date").val(), index: index,time: time});
+
+
+              $.ajax({
+                type: "POST",
+                url: "bus.php",
+                data: "date=" + $("#date").val()+"&index="+ index+"&time="+time,
+                success: function(response)
+                {
+                    alert("ciao");
+                    $("#busseat").html(response);
+                    
+                }, error: function (xhr, ajaxOptions, thrownError) {
+        alert("errore");
+      }
+            });
                 
            
-       // }); 
+   }); 
         
 //        $("#enterlogin").click(function(){
 //             $.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
@@ -259,29 +294,3 @@ $("#logout").click(function(){
     
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-

@@ -9,7 +9,7 @@
 ?>
 
 <script type="text/javascript">
-    alert("Per visualizzare questa pagina devi essere registrato!");
+   // alert("Per visualizzare questa pagina devi essere registrato!");
     location.href="index.php";
 </script>
 <?php

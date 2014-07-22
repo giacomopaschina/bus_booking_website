@@ -408,3 +408,16 @@ section{
     width: 320px;
     margin: 30px auto;
   }
+
+  #timetitle
+  {
+      display: table;
+      vertical-align: middle;
+      width: 100%;
+  }
+  
+  #timetitle h3
+  {
+      display:table-cell;
+  }
+  
