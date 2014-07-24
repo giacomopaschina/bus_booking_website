@@ -1,6 +1,5 @@
 <?php
     session_start();
-//    require_once("comuni/header.php");
     require_once ("comuni/myconnect.php");
     
     if(!IsSet($_SESSION['name']))
@@ -137,9 +136,7 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
                      </div> 
                 </div>
 
-                    <div class=" col-md-12">
-                        <a href=" " class="btn btn-primary btn-lg btn-block" style="margin-top: 70px;"id="finalpren">Book </a>
-                    </div>
+                   
             
             
                                </div>
@@ -168,6 +165,8 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/bootbox.js"></script>
+
 
 </body>
 <script type="text/javascript">
@@ -175,122 +174,138 @@ $("#signup").click(function(e){
     e.preventDefault();
     $("#signupModal").css("visibility","visible");
     $("#loginModal").css("visibility","hidden");
-});
+    });
+
 $("#login").click(function(e){
     e.preventDefault();
     $("#loginModal").css("visibility","visible");
         $("#signupModal").css("visibility","hidden");
+    });
 
-});
 $("#cancel").click(function(e){
     e.preventDefault();
     $("#signupModal").css("visibility","hidden");
-});
+    });
+
 $("#cancellogin").click(function(e){
     e.preventDefault();
     $("#loginModal").css("visibility","hidden");
-});
+    });
 
-$("#logout").click(function(){
-            $.ajax({
-                url: "esci.php",
-                
-            });
-            alert("you are logged out");
-        }); 
+$("#logout").click(function(e){
+    e.preventDefault();
+    
+    $.ajax({
+        url: "esci.php",                
+    });
+    bootbox.alert("you are logged out", function(){
+        location.href="index.php";
+    });
+}); 
         
   //     $("#form2").ajaxForm({url: 'login.php', type: 'post'});
-window.onload = function ()
-{
- var mydiv = document.getElementById("timetables");
-    var curr_height= parseInt(mydiv.offsetHeight); // removes the "px" at the end
-   $("#busdiv").css({height: curr_height +'px'})
+  window.onload = function (){
+      var mydiv = document.getElementById("timetables");
+      var curr_height= parseInt(mydiv.offsetHeight); // removes the "px" at the end
+      $("#busdiv").css({height: curr_height +'px'});
+  };
 
-}
   $('#direction').change(function(){
-              var index=$("#direction option:selected").index();
-              if(index===0)
-              {
-                  $("#time").css("visibility","hidden");
-              }
-              else
-              {
-                   $("#time").css("visibility","visible");
-                   
-                    $.ajax({
+      var index=$("#direction option:selected").index();
+      if(index===0)
+      {
+          $("#time").css("visibility","hidden");
+      }
+      else
+      {
+          $("#time").css("visibility","visible");
+          $.ajax({
                 type: "POST",
                 url: "qprenot.php",
                 data: "val=" + index,
                 success: function(response){
-        $("#time").html(response);
-                    
-                }
-            });
-               
+                    $("#time").html(response);
+                    }
+                });
+            
         }
-                          
-                
-           
-        }); 
-         $('#time').change(function(){
-              var index=$("#time option:selected").index();
-              var d=new Date();
-              if(index===0)
-              {
-                  $("#date").css("visibility","hidden");
-              }
-              else
-              {
-                  
-                   $("#date").css("visibility","visible");
-                   
-//                    $.ajax({
-//                type: "POST",
-//                url: "bus.php",
-//                data: "val=" + index,
-//                success: function(response){
-//        $("#busdiv").html(response);
-//                    
-//                }
-//            });
-               
+    }); 
+    $('#time').change(function(){
+        var index=$("#time option:selected").index();
+        var d=new Date();
+        if(index===0)
+        {
+            $("#date").css("visibility","hidden");
         }
-                          
-                
-           
-        }); 
+        else
+        {
+            $("#date").css("visibility","visible");
+        }
+    });
+    $('#formtime').submit(function(e){
         
-              $('#formtime').submit(function(){
-                              var index=$("#direction option:selected").val();
-                              var time= $("#time option:selected").val();
-//                              alert(time);
-//                              alert (index);
-//                              alert($("#date").val());
-   // $.post('bus.php', { date: $("#date").val(), index: index,time: time});
+        e.preventDefault();
+        var index=$("#direction option:selected").val();
+        var time= $("#time option:selected").val();
+        var date=$("#date").val();
+        $.ajax({
+            type: "POST",
+            url: "bus.php",
+            data: "date=" + $("#date").val()+"&index="+ index+"&time="+time,
+            success: function(response){
+                alert("ciao");
+                $("#busseat").html(response);
+                $('.seattable').click(function(){
+                    var th=$(this);
+                  //  var idcall=$(this).attr("id");
+                    bootbox.dialog({
+                        message: "are you sure to book this seat?",
+                        title: "Book a seat",
+                        buttons: {
+                            success: {
+                                label: "Book!",
+                                className: "btn-success",
+                                callback: function() {
+                                    alert("ok");
+                                    var time= $("#time option:selected").val();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "bookseat.php",
+                                        data: "id=" + $(this).attr("id")+"&timeid="+ time+"&date="+date,
+                                        success: function(response){
+                                                   //         alert("ciao");
+                                                            
 
-
-              $.ajax({
-                type: "POST",
-                url: "bus.php",
-                data: "date=" + $("#date").val()+"&index="+ index+"&time="+time,
-                success: function(response)
-                {
-                    alert("ciao");
-                    $("#busseat").html(response);
-                    
-                }, error: function (xhr, ajaxOptions, thrownError) {
-        alert("errore");
-      }
-            });
-                
-           
-   }); 
-        
-//        $("#enterlogin").click(function(){
-//             $.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
+                                            if (response==='false')
+                                            {
+//                                                bootbox.alert(" Booking unsuccess", function() 
+//                                                {
 //
-//return false;
-//            });
-    
+//                                                });
+                                            }
+                                            else
+                                            {
+                                                bootbox.alert("Booked!", function(){
+                                                     });
+                                            }
+                                            alert(th.attr("id"));
+
+                                            var src = "img/seat_pren.png";
+                                            th.attr("src", src);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+                });
+            },
+            error: function (xhr, errorType, exception){
+                var errorMessage = exception || xhr.statusText; //If exception null, then default to xhr.statusText  
+                alert( "There was an error creating your contact: " + errorMessage );
+            }
+        });
+    }); 
+
 </script>
 </html>

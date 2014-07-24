@@ -17,7 +17,7 @@
 
 //$dbConnection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 //$dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    if(IsSet($_SESSION['nome']))
+    if(IsSet($_SESSION['name']))
     {
 ?>
 <script type="text/javascript">

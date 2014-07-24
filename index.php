@@ -214,6 +214,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
+    <script src="js/bootbox.js"></script>
+
 </body>
 <script type="text/javascript">
 $("#signup").click(function(e){
@@ -236,45 +238,61 @@ $("#cancellogin").click(function(e){
     $("#loginModal").css("visibility","hidden");
 });
 
-$("#logout").click(function(){
-            $.ajax({
-                url: "esci.php",
-                
-            });
-            alert("you are logged out");
-        }); 
+$("#logout").click(function(e){
+    e.preventDefault();
+    
+    $.ajax({
+        url: "esci.php",                
+    });
+    bootbox.alert("you are logged out", function(){
+        location.href="index.php";
+    });
+}); 
         
   //     $("#form2").ajaxForm({url: 'login.php', type: 'post'});
 
    
-          $('#form1').submit(function(){
+          $('#form1').submit(function(e){
+              
 
-          //    $.post('verify.php', { name: $("#name").val(), surname: $("#surname").val(), email: $("#email").val(),psw: $("#psw").val()});
 
-        $.ajax({
-                type: "POST",
-                url: "verify.php",
-                data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
-                success: function(response){
-                            $("#form1").html(response);
+              $.post('verify.php', { name: $("#name").val(), surname: $("#surname").val(), email: $("#email").val(),psw: $("#psw").val()});
 
-                }
-            });
+alert("Sign Up Success! Thank you");
+//        $.ajax({
+//                type: "POST",
+//                url: "verify.php",
+//                data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
+//                success: function(response){
+//                            $("#form1").html(response);
+//
+//                }
+//            });
                 
            
         }); 
-              $('#form2').submit(function(){
-     //$.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
-                
-              $.ajax({
-                type: "POST",
-                url: "login.php",
-                data: "email=" + $("#emaillogin").val()+"&psw="+ $("#pswlogin").val(),
-                success: function(response){
-                            $("#form2").html(response);
+              $('#form2').submit(function(e){
+     $.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
 
-                }
-            });
+//              $.ajax({
+//                type: "POST",
+//                url: "login.php",
+//                data: "email=" + $("#emaillogin").val()+"&psw="+ $("#pswlogin").val(),
+//                success: function(response){
+//                    alert("ciao");
+//                            $("#form2").html(response);
+//
+//                },
+//                error: function (data) {
+//        alert("errore");
+//        var r = jQuery.parseJSON(data.responseText);
+//                       alert("Message: " + r.Message);
+//                       alert("StackTrace: " + r.StackTrace);
+//                       alert("ExceptionType: " + r.ExceptionType);
+//      }
+//    });
+                
+           
                 
            
         }); 
