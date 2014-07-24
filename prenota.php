@@ -253,11 +253,10 @@ $("#logout").click(function(e){
             url: "bus.php",
             data: "date=" + $("#date").val()+"&index="+ index+"&time="+time,
             success: function(response){
-                alert("ciao");
                 $("#busseat").html(response);
                 $('.seattable').click(function(){
                     var th=$(this);
-                  //  var idcall=$(this).attr("id");
+                    var number=$(this).attr("id");
                     bootbox.dialog({
                         message: "are you sure to book this seat?",
                         title: "Book a seat",
@@ -266,32 +265,28 @@ $("#logout").click(function(e){
                                 label: "Book!",
                                 className: "btn-success",
                                 callback: function() {
-                                    alert("ok");
+                                    //alert("ok");
                                     var time= $("#time option:selected").val();
                                     $.ajax({
                                         type: "POST",
                                         url: "bookseat.php",
-                                        data: "id=" + $(this).attr("id")+"&timeid="+ time+"&date="+date,
+                                        data: "id="+number+"&timeid="+ time+"&date="+date,
                                         success: function(response){
-                                                   //         alert("ciao");
-                                                            
-
                                             if (response==='false')
                                             {
-//                                                bootbox.alert(" Booking unsuccess", function() 
-//                                                {
-//
-//                                                });
+                                                bootbox.alert("Book unsuccess!", function(){
+                                                     });
                                             }
                                             else
                                             {
                                                 bootbox.alert("Booked!", function(){
                                                      });
                                             }
-                                            alert(th.attr("id"));
+                            //                alert(th.attr("id"));
 
                                             var src = "img/seat_pren.png";
                                             th.attr("src", src);
+                                           
                                         }
                                     });
                                 }

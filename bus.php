@@ -27,13 +27,16 @@
     $mysqli = myconnect();
     $stmt = $mysqli->prepare("select state, number from Seats where timeid = ? and date= ? "); 
     $stmt->bind_param("is", $time,$date);
+   
     $stmt->execute();
 
     $stmt->bind_result($state,$number);
+    
     while ($stmt->fetch()) {
-        $seat[$number] = $state;    
+        $seat[$number] = $number;    
     }
     
+    $class="unseattable";
     
     echo '<table style = "margin-left: auto; margin-right: auto">';
     $id = 0;
@@ -42,13 +45,14 @@
         echo '<tr>';
         for ($k=0; $k<10; $k++) {
             $img = "img/seat_free.png";
+            $class="seattable";
             if (in_array($id,$seat)) {
-                if ($seat[$id]==0) 
-                {$img = "img/seat_pren.png";}
-                else 
-                    {$img = "img/seat_pren.png";}
+                $img = "img/seat_pren.png";
+                $class="unseattable";
+
             }
-            echo '<td ><img id="'.$id.'" class="seattable" src="'.$img.'" /></td>';
+            
+            echo '<td ><img id="'.$id.'" class="'.$class.'" src="'.$img.'" /></td>';
              $id++;   
             
     }
