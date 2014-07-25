@@ -38,22 +38,22 @@
             <div class="modal-body">
                 <form id ="form1"  class="form col-md-12 center-block">
             <div class="  form-group">
-              <input type="text" id="name" class="form-control input-lg"  placeholder="Name">
+              <input type="text" id="name" class="form-control input-lg" name="name" placeholder="Name">
             </div>
             <div class=" form-group">
-              <input type="text" id="surname" class="form-control input-lg" placeholder="Surname">
+              <input type="text" id="surname" class="form-control input-lg" name="surname" placeholder="Surname">
             </div>
               <div class=" form-group">
-              <input type="text" id="email" class="form-control input-lg" placeholder="Email">
+              <input type="text" id="email" class="form-control input-lg" name="email" placeholder="Email">
             </div>
               <div class=" form-group">
-              <input type="password" id="psw" class="form-control input-lg" placeholder="Password">
+              <input type="password" id="psw" class="form-control input-lg" name="psw" placeholder="Password">
             </div>
               <div class=" form-group">
-              <input type="password" id="psw2" class="form-control input-lg" placeholder="Repeat password">
+              <input type="password" id="psw2" class="form-control input-lg" name="psw2" placeholder="Repeat password">
             </div>
               <div >
-              <input type="submit" value="Sign up"  class="btn btn-primary btn-lg btn-block">
+                  <input type="submit" value="Sign up" id="sig"  class="btn btn-primary btn-lg btn-block">
               <input type="reset" value="Cancel" id="cancel" class="btn btn-primary btn-lg btn-block"> 
           </div>
           </form>
@@ -125,7 +125,7 @@
                         if(!IsSet($_SESSION['name']))
                             {
                         ?>
-                       <a href="" id="signup">Sign up </a>
+                        <a href="" id="signup" >Sign up </a>
                         <?php                       
                             }
                             else
@@ -190,6 +190,8 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2>iit bus booking</h2>
                     <p>With two bus routes spread across Genoa, iit’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
+                    <p>With two bus routes spread across Genoa, iit’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
+                    <p>With two bus routes spread across Genoa, iit’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
                     <p>Enjoy your travel and thanks for choosing us.</p>
                 </div>
             </div>
@@ -219,10 +221,13 @@
     <script src="js/grayscale.js"></script>
     <script src="js/bootbox.js"></script>
     <script src="js/bootstrapValidator.js"></script>
+    <script src="js/jquery.validate.js"></script>
 
-</body>
+
+ </body>
 
 <script type="text/javascript">
+    $(document).ready(function() {
 $("#signup").click(function(e){
     e.preventDefault();
     $("#signupModal").css("visibility","visible");
@@ -257,30 +262,148 @@ $("#logout").click(function(e){
     });
 }); 
 
-$('#form1').submit(function(e){
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: "verify.php",
-        data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
-        success: function(response){ 
-            response= response.replace(/\s+/g, '');
-            if(response.localeCompare("true")===0)
-            {
-                bootbox.alert("Signup success!", function(){
-                location.href="index.php";
-                });
-            }
-            else
-            {
-                bootbox.alert("User already signed!", function(){
-                location.href="index.php";
-                });
-            }
-            }
-        });
-    }); 
+//$('#form1').bootstrapValidator({
+//        message: 'This value is not valid',
+//        feedbackIcons: {
+//            valid: 'glyphicon glyphicon-ok',
+//            invalid: 'glyphicon glyphicon-remove',
+//            validating: 'glyphicon glyphicon-refresh'
+//        },
+//        fields: {
+//            name: {
+//                message: 'The username is not valid',
+//                validators: {
+//                    notEmpty: {
+//                        message: 'The username is required and cannot be empty'
+//                    },
+//                    stringLength: {
+//                        min: 1,
+//                        max: 30,
+//                        message: 'The username must be more than 6 and less than 30 characters long'
+//                    },
+//                    regexp: {
+//                        regexp: /^[a-zA-Z0-9_]+$/,
+//                        message: 'The username can only consist of alphabetical, number and underscore'
+//                    }
+//                }
+//            },
+//            email: {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'The email is required and cannot be empty'
+//                    },
+//                    emailAddress: {
+//                        message: 'The input is not a valid email address'
+//                    }
+//                }
+//            }
+//        }
+//    });
+//
+//
+//$('#sig').click(function(e){
+//    e.preventDefault();
+//    $.ajax({
+//        type: "POST",
+//        url: "verify.php",
+//        data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
+//        success: function(response){ 
+//            response= response.replace(/\s+/g, '');
+//            alert(response);
+//            if(response.localeCompare("true")===0)
+//            {
+//                bootbox.alert("Signup success!", function(){
+//                location.href="index.php";
+//                });
+//            }
+//            else
+//            {
+//                bootbox.alert("User already signed!", function(){
+//                location.href="index.php";
+//                });
+//            }
+//            }
+//        });
+//    });
     
+//$('#form1').submit(function(e){
+//    e.preventDefault();
+//    $.ajax({
+//        type: "POST",
+//        url: "verify.php",
+//        data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
+//        success: function(response){ 
+//            response= response.replace(/\s+/g, '');
+//            alert(response);
+//            if(response.localeCompare("true")===0)
+//            {
+//                bootbox.alert("Signup success!", function(){
+//                location.href="index.php";
+//                });
+//            }
+//            else
+//            {
+//                bootbox.alert("User already signed!", function(){
+//                location.href="index.php";
+//                });
+//            }
+//            }
+//        });
+//    }); 
+
+$("#form1").validate({
+    rules: {
+        "email": {
+            required: true,
+            email: true
+        },  
+        "name": {
+            required: true,
+            minlength: 1
+        },
+        "surname": {
+            required: true,
+            minlength: 1
+        },
+        "psw": {
+            required: true,
+            minlength: 3
+        },
+        "psw2": {
+            required: true,
+            minlength: 3,
+            equalTo: "#psw"
+        }
+    },
+        submitHandler: function(e){
+
+                $.ajax({
+                    type: "POST",
+                    url: "verify.php",
+                    data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
+                    success: function(response){ 
+                        response= response.replace(/\s+/g, '');
+                        alert(response);
+                        if(response.localeCompare("true")===0)
+                        {
+                            bootbox.alert("Signup success!", function(){
+                            location.href="index.php";
+                            });
+                        }
+                        else
+                        {
+                            bootbox.alert("User already signed!", function(){
+                            location.href="index.php";
+                            });
+                        }
+                        },
+                        error: function()
+                        {
+                        }
+                    });
+                }
+});
+
 $('#form2').submit(function(e){
     e.preventDefault();
     $.ajax({
@@ -308,6 +431,8 @@ $('#form2').submit(function(e){
         }
     });
 }); 
+    });
+
 </script>
 </html>
 

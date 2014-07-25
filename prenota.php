@@ -100,7 +100,7 @@
                                 </select>
                                 <select id="time" class="btn  btn-primary btn-lg btn-block " style="visibility: hidden;" >
                                 </select>
-                                 <input  type="date"  class="btn-lg btn-block btn  btn-primary " style="visibility: hidden;"    id="date">
+                                 <input  type="date"   class="btn-lg btn-block btn  btn-primary " style="visibility: hidden;"   id="date">
                                  <br>
                                  <div>
                                      <input type="submit" id="book_btn" value="Search"  class="btn btn-primary btn-lg btn-block">
@@ -216,6 +216,37 @@ $("#logout").click(function(e){
         var index=$("#direction option:selected").val();
         var time= $("#time option:selected").val();
         var date=$("#date").val();
+        var td=date.split("-");
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        
+        td[0]=parseInt(td[0]);
+        td[0]=parseInt(td[1]); td[0]=parseInt(td[2]);
+        yyyy=parseInt(yyyy);
+        mm=parseInt(mm);
+        dd=parseInt(dd);
+
+        if(yyyy<td[0])
+        {
+            bootbox.alert("Date incorrect!", function(){
+                location.href="prenota.php";
+                });
+        }
+        if(mm<td[1])
+        {
+            bootbox.alert("Date incorrect!", function(){
+                location.href="prenota.php";
+                });
+        }
+        if(dd>td[2])
+        {
+            bootbox.alert("Date incorrect!", function(){
+                location.href="prenota.php";
+                });
+        }
+        
         $.ajax({
             type: "POST",
             url: "bus.php",
