@@ -27,7 +27,8 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
 
-<!--signup modal-->
+<!--------------------sign up begins-------------------------------->
+
 <div id="signupModal" style="position:fixed; margin-top:50px; visibility:hidden;"  class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -36,24 +37,23 @@
             </div>
             <div class="modal-body">
                 <form id ="form1"  class="form col-md-12 center-block">
-            <div class="form-group">
+            <div class="  form-group">
               <input type="text" id="name" class="form-control input-lg"  placeholder="Name">
             </div>
-            <div class="form-group">
+            <div class=" form-group">
               <input type="text" id="surname" class="form-control input-lg" placeholder="Surname">
             </div>
-              <div class="form-group">
+              <div class=" form-group">
               <input type="text" id="email" class="form-control input-lg" placeholder="Email">
             </div>
-              <div class="form-group">
+              <div class=" form-group">
               <input type="password" id="psw" class="form-control input-lg" placeholder="Password">
             </div>
-              <div class="form-group">
+              <div class=" form-group">
               <input type="password" id="psw2" class="form-control input-lg" placeholder="Repeat password">
             </div>
               <div >
               <input type="submit" value="Sign up"  class="btn btn-primary btn-lg btn-block">
-             
               <input type="reset" value="Cancel" id="cancel" class="btn btn-primary btn-lg btn-block"> 
           </div>
           </form>
@@ -65,41 +65,39 @@
   </div>
   </div>
 </div>
-    <!--signup ends-->
-     <!--login modal-->
+
+<!--------------------sign up ends-------------------------------->
+
+<!--------------------login begins-------------------------------->
+
 <div id="loginModal" style="position:fixed; margin-top:50px; visibility:hidden;"  class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <h2 class="text-center">Login</h2>
-      </div>
-      <div class="modal-body">
-          <form id="form2" class="form col-md-12 center-block">
-            <div class="form-group">
-              <input type="text" id="emaillogin" class="form-control input-lg" placeholder="Email">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-center">Login</h2>
             </div>
-              <div class="form-group">
-              <input type="password" id="pswlogin" class="form-control input-lg" placeholder="Password">
+            <div class="modal-body">
+                <form id="form2" class="form col-md-12 center-block">
+                    <div class="form-group">
+                        <input type="text" id="emaillogin" class="form-control input-lg" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="pswlogin" class="form-control input-lg" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <br>
+                        <input type="submit" value="Enter" class="btn  btn-primary btn-lg btn-block" >
+                        <input type="reset"id="cancellogin" value="Cancel" class="btn  btn-primary btn-lg btn-block" >
+                    </div>
+                </form>
+                <div class="modal-footer"></div>
             </div>
-              
-              <div class="form-group">
-                  <br>
-              <input type="submit" value="Enter" class="btn  btn-primary btn-lg btn-block" >
-           
-              <input type="reset"id="cancellogin" value="Cancel" class="btn  btn-primary btn-lg btn-block" >
-          </div>
-          </form>
-     
-      <div class="modal-footer">
-          	
-      </div>
-  </div>
-  </div>
+                
+        </div>
   </div>
 </div>
-    <!--login ends-->
-    
-    
+<!--------------------login ends-------------------------------->
+        
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header page-scroll">
@@ -112,6 +110,7 @@
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
+    
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
@@ -124,34 +123,41 @@
                     <li >
                         <?php
                         if(!IsSet($_SESSION['name']))
-{
+                            {
                         ?>
                        <a href="" id="signup">Sign up </a>
-                        <?php
-}else
-    {?> </li><li><a href=" " id="credential"><?php echo($_SESSION['name']." ".$_SESSION['surname']);?></a><?php
-
-
-
-}
+                        <?php                       
+                            }
+                            else
+                                {
+                                ?>
+                    </li><li><a href=" " id="credential">
+                        <?php 
+                        echo($_SESSION['name']." ".$_SESSION['surname']);
+                        ?></a>
+                            <?php
+                                }
                         ?>
-                        
                     </li>
                     <li >
                         <?php
                         if(!IsSet($_SESSION['name']))
-{
+                            {
                         ?>
                         <a href=" " id="login">Login</a>
-                        <?php
-}else
-    {?> <a href=" prenota.php" >book a bus</a> </li><li>
-                        <a href="cancel.php " >Cancel a booking</a></li>                        <li>
-
+                        <?php                       
+                            }
+                            else
+                            {
+                            ?> <a href=" prenota.php" >book a bus</a> 
+                    </li>
+                    <li>
+                        <a href="cancel.php " >Cancel a booking</a>
+                    </li>
+                    <li>
                         <a href="" id="logout">Logout</a></li>
-    <?php
-
-}
+                            <?php
+                            }
                         ?>
                 </ul>
             </div>
@@ -183,9 +189,8 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2>iit bus booking</h2>
-                    <p>Grayscale is a premium quality, free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, all you need to do is download the template on the preview page. You can use this template for any purpose, personal or commercial.</p>
-                    <p>This striking, black and white theme features stock photographs by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Map skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                    <p>With this template, just the slightest splash of color can make a huge impact on the overall presentation and design.</p>
+                    <p>With two bus routes spread across Genoa, iit’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
+                    <p>Enjoy your travel and thanks for choosing us.</p>
                 </div>
             </div>
         </div>
@@ -203,8 +208,6 @@
             
         </div>
     </section>
-    
-    
    
 
     <!-- Core JavaScript Files -->
@@ -215,24 +218,29 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
     <script src="js/bootbox.js"></script>
+    <script src="js/bootstrapValidator.js"></script>
 
 </body>
+
 <script type="text/javascript">
 $("#signup").click(function(e){
     e.preventDefault();
     $("#signupModal").css("visibility","visible");
     $("#loginModal").css("visibility","hidden");
 });
+
 $("#login").click(function(e){
     e.preventDefault();
     $("#loginModal").css("visibility","visible");
         $("#signupModal").css("visibility","hidden");
 
 });
+
 $("#cancel").click(function(e){
     e.preventDefault();
     $("#signupModal").css("visibility","hidden");
 });
+
 $("#cancellogin").click(function(e){
     e.preventDefault();
     $("#loginModal").css("visibility","hidden");
@@ -244,68 +252,62 @@ $("#logout").click(function(e){
     $.ajax({
         url: "esci.php",                
     });
-    bootbox.alert("you are logged out", function(){
+    bootbox.alert("You are logged out", function(){
         location.href="index.php";
     });
 }); 
-        
-  //     $("#form2").ajaxForm({url: 'login.php', type: 'post'});
 
-   
-          $('#form1').submit(function(e){
-              
-              e.preventDefault();
-
-//              $.post('verify.php', { name: $("#name").val(), surname: $("#surname").val(), email: $("#email").val(),psw: $("#psw").val()});
-//
-//alert("Sign Up Success! Thank you");
-        $.ajax({
-                type: "POST",
-                url: "verify.php",
-                data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
-                success: function(response){
-                           // $("#form1").html(response);
-                                                      window.location="index.php";
-
-                }
-            });
-                
-           
-        }); 
-              $('#form2').submit(function(e){
-                  e.preventDefault();
-     //$.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
-
-              $.ajax({
-                type: "POST",
-                url: "login.php",
-                data: "email=" + $("#emaillogin").val()+"&psw="+ $("#pswlogin").val(),
-                success: function(response){
-                   // alert("ciao");
-                           // $("#form2").html(response);
-                           window.location="index.php";
-
-                },
-                error: function (data) {
-        alert("errore");
-        var r = jQuery.parseJSON(data.responseText);
-                       alert("Message: " + r.Message);
-                       alert("StackTrace: " + r.StackTrace);
-                       alert("ExceptionType: " + r.ExceptionType);
-      }
-    });
-                
-           
-                
-           
-        }); 
-        
-//        $("#enterlogin").click(function(){
-//             $.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
-//
-//return false;
-//            });
+$('#form1').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "verify.php",
+        data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
+        success: function(response){ 
+            response= response.replace(/\s+/g, '');
+            if(response.localeCompare("true")===0)
+            {
+                bootbox.alert("Signup success!", function(){
+                location.href="index.php";
+                });
+            }
+            else
+            {
+                bootbox.alert("User already signed!", function(){
+                location.href="index.php";
+                });
+            }
+            }
+        });
+    }); 
     
+$('#form2').submit(function(e){
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "login.php",
+        data: "email=" + $("#emaillogin").val()+"&psw="+ $("#pswlogin").val(),
+        success: function(response){
+            response= response.replace(/\s+/g, '');
+                    
+            if(response.localeCompare("true")===0)
+            {
+                bootbox.alert("Login success!", function(){
+                location.href="index.php";
+                });
+            }
+            else
+            {
+                bootbox.alert("Username or password incorrect, retry!", function(){
+                location.href="index.php";
+                });
+            }
+        },
+        error: function () {
+            
+        }
+    });
+}); 
 </script>
 </html>
 

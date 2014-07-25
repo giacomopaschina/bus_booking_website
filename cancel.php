@@ -60,10 +60,7 @@
                     </li>
                     <li >
                          <a href=" "><?php
-echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
-
-                        ?>
-                        
+                         echo($_SESSION['name']." ".$_SESSION['surname']);?> </a>                        
                     </li>
                     <li >
                         <a href="prenota.php" >book a bus</a> </li>
@@ -71,7 +68,6 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
                         <a href="cancel.php " >Cancel a booking</a>
                     </li>
                     <li>
-
                         <a href=" " id="logout">Logout</a>
                     </li>
                 </ul>
@@ -80,12 +76,7 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
         </div>
         <!-- /.container -->
     </nav>
-    <?php
    
-
-     $mysqli = myconnect();
-    ?>
-
     <section class="intro">
         <div class="intro-body">
             <div class="container">
@@ -93,65 +84,41 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
                     <div class=" col-md-8  col-md-offset-2">
                         <h2 >Cancel a Booking</h2>
                     </div>
-                    </div>
+                </div>
                 <div id="canceltime" class=" col-sm-12 modal-content ">
-                     <div class="  selectpicker  ">
+                    <div class="  selectpicker  ">
                           <div class="modal-header" id="timetitle">
-                <h3 class="text-center" >Timetable</h3>
-            </div>
-                         <div class="modal-body">
-                      <select id="selseat" class=" btn btn-primary  btn-block  " >
-             <option value="" >--Select--</option>
+                              <h3 class="text-center" >Timetable</h3>
+                          </div>
+                    <div class="modal-body">
+                        <select id="selseat" class=" btn btn-primary  btn-block  " >
+                            <option value="" >--Select--</option>
+                                <?php 
+                                $mysqli = myconnect();
+                                $stmt = $mysqli->prepare("select * from Seats inner join Timetables on Seats.timeid=Timetables.id where Seats.email= ?"); 
+                                $stmt->bind_param("s", $_SESSION['email']);
+                                $stmt->execute();
+                                $stmt->bind_result($col1, $col2,$col3, $col4,$col5,$col6,$coltime1, $coltime2,$coltime3, $coltime4,$coltime5,$coltime6,$coltime7); 
+                                while ($stmt->fetch())  
+                                     {
+                                         ?>
+                            <option value="<?php echo $col1; ?>">
+                                <?php
+                                $timeor=" Date: "."$col3"." N.: "."$col5"." Start at: "."$coltime2"." Arrive at: "." $coltime3"." From: "."$coltime4"." To: "."$coltime5"."   ";
+                                echo $timeor;
 
-   
-    <?php 
-    
-    $stmt = $mysqli->prepare("select * from Seats inner join Timetables on Seats.timeid=Timetables.id where Seats.email= ?"); 
-    $stmt->bind_param("s", $_SESSION['email']);
-    $stmt->execute();
-    $stmt->bind_result($col1, $col2,$col3, $col4,$col5,$col6,$coltime1, $coltime2,$coltime3, $coltime4,$coltime5,$coltime6,$coltime7); 
-    while ($stmt->fetch())  
-         {
-             ?>
-        <option value="<?php echo $col1; ?>">
-            <?php
-            $timeor=" Date: "."$col3"." N.: "."$col5"." Start at: "."$coltime2"." Arrive at: "." $coltime3"." From: "."$coltime4"." To: "."$coltime5"."   ";
-            echo $timeor;
-            
-            ?>
-        </option>
-             <?php }
-             
-             $stmt->close();
-             ?>
-</select>
-          
-                                           </div>
-                     </div> 
-
+                                ?>
+                            </option>
+                                <?php }
+                                $stmt->close();
+                                ?>
+                        </select>
                     </div>
-                
-
-                   
-            
-            
-                               </div>
-
-                        
-           
-             
-           
-                
-
-      	
-      </div>
-    
-                
-          
+                    </div> 
+                </div>
+            </div>
+        </div>
     </section>
-
-    
-   
 
     <!-- Core JavaScript Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -167,7 +134,6 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
 </body>
 <script type="text/javascript">
 
-
 $("#logout").click(function(e){
     e.preventDefault();
     
@@ -179,38 +145,35 @@ $("#logout").click(function(e){
     });
 }); 
         
-    $('#selseat').change(function(e){
-        
-        e.preventDefault();
-        var index=$("#selseat option:selected").val();
-        bootbox.dialog({
-                        message: "are you sure to delete this seat?",
-                        title: "Delete a seat",
-                        buttons: {
-                            success: {
-                                label: "Delete!",
-                                className: "btn-success",
-                                callback: function() {
-                                    alert(index);
-                                      $.ajax({
-                                                type: "POST",
-                                                url: "qcancel.php",
-                                                data: "index=" + index,
-                                                success: function(response){
-                                                    bootbox.alert("Cancellation successed!", function(){
-                                            location.href="cancel.php";
-                                        });
-                                    },
-                                    error: function (xhr, errorType, exception){
-                var errorMessage = exception || xhr.statusText; //If exception null, then default to xhr.statusText  
-                alert( "There was an error creating your contact: " + errorMessage );
-            }
-        });
-    }
-    }
-}
+$('#selseat').change(function(e){
+
+    e.preventDefault();
+    var index=$("#selseat option:selected").val();
+    bootbox.dialog({
+                    message: "are you sure to delete this seat?",
+                    title: "Delete a seat",
+                    buttons: {
+                        success: {
+                            label: "Delete!",
+                            className: "btn-success",
+                            callback: function() {
+                                  $.ajax({
+                                            type: "POST",
+                                            url: "qcancel.php",
+                                            data: "index=" + index,
+                                            success: function(response){
+                                                bootbox.alert("Cancellation successed!", function(){
+                                        location.href="cancel.php";
+                                    });
+                                },
+                                error: function (xhr, errorType, exception){
+                                }
+                            });
+                        }
+                    }
+                }
+            });
 });
-    });
     
 </script>
 </html>

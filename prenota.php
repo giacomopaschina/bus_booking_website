@@ -5,9 +5,7 @@
     if(!IsSet($_SESSION['name']))
     {
 ?>
-
 <script type="text/javascript">
-//    alert("Per visualizzare questa pagina devi essere registrato!");
     location.href="index.php";
 </script>
 <?php
@@ -60,20 +58,15 @@
                     <li class="page-scroll">
                         <a href="index.php#about">About us</a>
                     </li>
-                    <li >
-                         <a href=" "><?php
-echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
-
-                        ?>
-                        
+                    <li>
+                         <a href=" "><?php echo($_SESSION['name']." ".$_SESSION['surname']);?> </a>
                     </li>
-                    <li >
+                    <li>
                         <a href="prenota.php" >book a bus</a> </li>
                     <li>
-                        <a href=" cancel.php" >Cancel a booking</a>
+                        <a href="cancel.php" >Cancel a booking</a>
                     </li>
                     <li>
-
                         <a href=" " id="logout">Logout</a>
                     </li>
                 </ul>
@@ -82,11 +75,7 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
         </div>
         <!-- /.container -->
     </nav>
-    <?php
-     
-     //  $stmt->execute();
-    ?>
-
+   
     <section class="intro">
         <div class="intro-body">
             <div class="container">
@@ -97,61 +86,40 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
                     </div>
                 <div id="timetables" class=" col-sm-5  ">
                     <form id ="formtime"  action="#"class="form ">
-                     <div class="  selectpicker modal-content ">
+                        <div class="  selectpicker modal-content ">
                           <div class="modal-header" id="timetitle">
-                <h3 class="text-center" >Timetable</h3>
-            </div>
-                         <div class="modal-body">
-                      <select id="direction" class="btn   btn-primary btn-lg btn-block " >
-
-            <option value="" >--Select--</option>
-      
-            <option  value ="0"> From Bolzaneto to Morego   </option>
-                 <option value ="1"> From Morego to Bolzaneto</option>
-                 <option value ="2"> From Certosa to Morego</option>
-                 <option value ="3"> From Morego to Certosa</option>
-                                          
-      
-                       </select>
-                      <select id="time" class="btn  btn-primary btn-lg btn-block " style="visibility: hidden;" >
-
-                      </select>
-                             <input  type="date"  class="btn-lg btn-block btn  btn-primary " style="visibility: hidden;"    id="date">
-                             <br>
-                         <div >
-              <input type="submit" id="book_btn" value="Search"  class="btn btn-primary btn-lg btn-block">
-                   </div>
-                     </div>
-                     </div> </form></div>
+                              <h3 class="text-center" >Timetable</h3>
+                          </div>
+                            <div class="modal-body">
+                                <select id="direction" class="btn   btn-primary btn-lg btn-block " >
+                                    <option value="" >--Select--</option>
+                                    <option  value ="0"> From Bolzaneto to Morego   </option>  
+                                    <option value ="1"> From Morego to Bolzaneto</option>
+                                    <option value ="2"> From Certosa to Morego</option>
+                                    <option value ="3"> From Morego to Certosa</option>
+                                </select>
+                                <select id="time" class="btn  btn-primary btn-lg btn-block " style="visibility: hidden;" >
+                                </select>
+                                 <input  type="date"  class="btn-lg btn-block btn  btn-primary " style="visibility: hidden;"    id="date">
+                                 <br>
+                                 <div>
+                                     <input type="submit" id="book_btn" value="Search"  class="btn btn-primary btn-lg btn-block">
+                                 </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="col-sm-7" >
                     <div id="busdiv" class="  modal-content ">
                         <div class="modal-header" id="timetitle">
-                <h3 class="text-center" >Seats</h3>
-            </div>
-
-                         <div class="modal-body" id="busseat">
- 
-
-                     </div>
-                     </div> 
+                            <h3 class="text-center" >Seats</h3>
+                        </div>
+                        <div class="modal-body" id="busseat"></div>
+                    </div> 
                 </div>
-
-                   
-            
-            
-                               </div>
-
-                        
-           
-             
-           
+            </div>
                 
-
-      	
-      </div>
-    
-                
-          
+        </div>
     </section>
 
     
@@ -265,7 +233,6 @@ $("#logout").click(function(e){
                                 label: "Book!",
                                 className: "btn-success",
                                 callback: function() {
-                                    //alert("ok");
                                     var time= $("#time option:selected").val();
                                     $.ajax({
                                         type: "POST",
@@ -282,8 +249,6 @@ $("#logout").click(function(e){
                                                 bootbox.alert("Booked!", function(){
                                                      });
                                             }
-                            //                alert(th.attr("id"));
-
                                             var src = "img/seat_pren.png";
                                             th.attr("src", src);
                                            
@@ -295,9 +260,8 @@ $("#logout").click(function(e){
                     });
                 });
             },
-            error: function (xhr, errorType, exception){
-                var errorMessage = exception || xhr.statusText; //If exception null, then default to xhr.statusText  
-                alert( "There was an error creating your contact: " + errorMessage );
+            error: function (){
+                
             }
         });
     }); 
