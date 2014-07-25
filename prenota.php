@@ -70,7 +70,7 @@ echo($_SESSION['name']." ".$_SESSION['surname']);?> </a><?php
                     <li >
                         <a href="prenota.php" >book a bus</a> </li>
                     <li>
-                        <a href=" " >Unbook</a>
+                        <a href=" cancel.php" >Cancel a booking</a>
                     </li>
                     <li>
 

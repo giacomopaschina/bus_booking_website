@@ -146,7 +146,7 @@
                         <?php
 }else
     {?> <a href=" prenota.php" >book a bus</a> </li><li>
-                        <a href=" " >Unbook</a></li>                        <li>
+                        <a href="cancel.php " >Cancel a booking</a></li>                        <li>
 
                         <a href="" id="logout">Logout</a></li>
     <?php
@@ -254,43 +254,46 @@ $("#logout").click(function(e){
    
           $('#form1').submit(function(e){
               
+              e.preventDefault();
 
-
-              $.post('verify.php', { name: $("#name").val(), surname: $("#surname").val(), email: $("#email").val(),psw: $("#psw").val()});
-
-alert("Sign Up Success! Thank you");
-//        $.ajax({
-//                type: "POST",
-//                url: "verify.php",
-//                data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
-//                success: function(response){
-//                            $("#form1").html(response);
+//              $.post('verify.php', { name: $("#name").val(), surname: $("#surname").val(), email: $("#email").val(),psw: $("#psw").val()});
 //
-//                }
-//            });
+//alert("Sign Up Success! Thank you");
+        $.ajax({
+                type: "POST",
+                url: "verify.php",
+                data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
+                success: function(response){
+                           // $("#form1").html(response);
+                                                      window.location="index.php";
+
+                }
+            });
                 
            
         }); 
               $('#form2').submit(function(e){
-     $.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
+                  e.preventDefault();
+     //$.post('login.php', { email: $("#emaillogin").val(), psw: $("#pswlogin").val()});
 
-//              $.ajax({
-//                type: "POST",
-//                url: "login.php",
-//                data: "email=" + $("#emaillogin").val()+"&psw="+ $("#pswlogin").val(),
-//                success: function(response){
-//                    alert("ciao");
-//                            $("#form2").html(response);
-//
-//                },
-//                error: function (data) {
-//        alert("errore");
-//        var r = jQuery.parseJSON(data.responseText);
-//                       alert("Message: " + r.Message);
-//                       alert("StackTrace: " + r.StackTrace);
-//                       alert("ExceptionType: " + r.ExceptionType);
-//      }
-//    });
+              $.ajax({
+                type: "POST",
+                url: "login.php",
+                data: "email=" + $("#emaillogin").val()+"&psw="+ $("#pswlogin").val(),
+                success: function(response){
+                   // alert("ciao");
+                           // $("#form2").html(response);
+                           window.location="index.php";
+
+                },
+                error: function (data) {
+        alert("errore");
+        var r = jQuery.parseJSON(data.responseText);
+                       alert("Message: " + r.Message);
+                       alert("StackTrace: " + r.StackTrace);
+                       alert("ExceptionType: " + r.ExceptionType);
+      }
+    });
                 
            
                 
