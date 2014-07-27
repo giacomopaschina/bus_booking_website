@@ -1,8 +1,7 @@
 bus_booking_website
 ===================
 
-The purpose of the bus booking website is to provide a sample demonstration of a site that allows IIT staff to book own travel to reserve a seat on the bus to and 
-from the IIT located at Morego.
+The purpose of the bus booking website is to provide a sample demonstration of a site that allows IIT staff to book a seat on the shuttle bus to and from the IIT located at Morego.
 The site provides this features:
 
 * A responsive and flat interface based on Bootstrap.js
