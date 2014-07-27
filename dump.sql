@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.34)
 # Database: iit_bus
-# Generation Time: 2014-07-21 07:29:12 +0000
+# Generation Time: 2014-07-27 11:17:21 +0000
 # ************************************************************
 
 
@@ -51,9 +51,10 @@ DROP TABLE IF EXISTS `Seats`;
 CREATE TABLE `Seats` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `timeid` int(11) NOT NULL,
-  `data` date NOT NULL,
+  `date` date NOT NULL,
   `state` int(1) NOT NULL,
   `number` int(11) NOT NULL,
+  `email` varchar(60) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -71,33 +72,34 @@ CREATE TABLE `Timetables` (
   `departureplace` varchar(60) NOT NULL DEFAULT '',
   `arrivalplace` varchar(60) NOT NULL DEFAULT '',
   `plate` varchar(11) NOT NULL DEFAULT '',
+  `travel` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `Timetables` WRITE;
 /*!40000 ALTER TABLE `Timetables` DISABLE KEYS */;
 
-INSERT INTO `Timetables` (`id`, `departuretime`, `arrivaltime`, `departureplace`, `arrivalplace`, `plate`)
+INSERT INTO `Timetables` (`id`, `departuretime`, `arrivaltime`, `departureplace`, `arrivalplace`, `plate`, `travel`)
 VALUES
-	(1,'07:45:00','08:00:00','Certosa','Morego','DD000DD'),
-	(2,'08:10:00','08:25:00','Morego','Certosa','DD000DD'),
-	(3,'08:45:00','09:00:00','Certosa','Morego','DD000DD'),
-	(4,'09:10:00','09:25:00','Morego','Certosa','DD000DD'),
-	(5,'09:45:00','10:00:00','Certosa','Morego','DD000DD'),
-	(6,'10:10:00','10:25:00','Morego','Certosa','DD000DD'),
-	(7,'17:00:00','17:15:00','Morego','Certosa','DD000DD'),
-	(8,'17:30:00','17:45:00','Certosa','Morego','DD000DD'),
-	(9,'18:00:00','18:15:00','Morego','Certosa','DD000DD'),
-	(10,'18:30:00','18:45:00','Certosa','Morego','DD000DD'),
-	(11,'19:00:00','19:15:00','Morego','Certosa','DD000DD'),
-	(13,'07:45:00','07:50:00','Bolzaneto','Morego','EE111EE'),
-	(14,'08:00:00','08:05:00','Morego','Bolzaneto','EE111EE'),
-	(15,'08:45:00','08:50:00','Bolzaneto','Morego','EE111EE'),
-	(16,'09:00:00','09:05:00','Morego','Bolzaneto','EE111EE'),
-	(18,'09:45:00','09:50:00','Bolzaneto','Morego','EE111EE'),
-	(20,'18:10:00','18:15:00','Morego','Bolzaneto','EE111EE'),
-	(21,'18:30:00','18:35:00','Bolzaneto','Morego','EE111EE'),
-	(22,'19:10:00','19:15:00','Morego','Bolzaneto','EE111EE');
+	(1,'07:45:00','08:00:00','Certosa','Morego','DD000DD',3),
+	(2,'08:10:00','08:25:00','Morego','Certosa','DD000DD',4),
+	(3,'08:45:00','09:00:00','Certosa','Morego','DD000DD',3),
+	(4,'09:10:00','09:25:00','Morego','Certosa','DD000DD',4),
+	(5,'09:45:00','10:00:00','Certosa','Morego','DD000DD',3),
+	(6,'10:10:00','10:25:00','Morego','Certosa','DD000DD',4),
+	(7,'17:00:00','17:15:00','Morego','Certosa','DD000DD',4),
+	(8,'17:30:00','17:45:00','Certosa','Morego','DD000DD',3),
+	(9,'18:00:00','18:15:00','Morego','Certosa','DD000DD',4),
+	(10,'18:30:00','18:45:00','Certosa','Morego','DD000DD',3),
+	(11,'19:00:00','19:15:00','Morego','Certosa','DD000DD',4),
+	(13,'07:45:00','07:50:00','Bolzaneto','Morego','EE111EE',1),
+	(14,'08:00:00','08:05:00','Morego','Bolzaneto','EE111EE',2),
+	(15,'08:45:00','08:50:00','Bolzaneto','Morego','EE111EE',1),
+	(16,'09:00:00','09:05:00','Morego','Bolzaneto','EE111EE',2),
+	(18,'09:45:00','09:50:00','Bolzaneto','Morego','EE111EE',1),
+	(20,'18:10:00','18:15:00','Morego','Bolzaneto','EE111EE',2),
+	(21,'18:30:00','18:35:00','Bolzaneto','Morego','EE111EE',1),
+	(22,'19:10:00','19:15:00','Morego','Bolzaneto','EE111EE',2);
 
 /*!40000 ALTER TABLE `Timetables` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -121,10 +123,7 @@ LOCK TABLES `Users` WRITE;
 
 INSERT INTO `Users` (`email`, `name`, `surname`, `password`)
 VALUES
-	('a','a','a','0cc175b9c0f1b6a831c399e269772661'),
-	('b','b','b','92eb5ffee6ae2fec3ad71c777531578f'),
-	('c','c','c','4a8a08f09d37b73795649038408b5f33'),
-	('giulia.pasquale@iit.it','Giulia','Pasquale','1a1dc91c907325c69271ddf0c944bc72');
+	('giacomo.paschina@gmail.com','Giacomo','Paschina','189bbbb00c5f1fb7fba9ad9285f193d1');
 
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;

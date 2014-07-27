@@ -172,7 +172,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">iit bus booking</h1>
-                        <p class="intro-text">A free booking of iit bus travel</p>
+                        <p class="intro-text">A free booking of IIT bus travel</p>
                         <div class="page-scroll">
                             <a href="#about" id="bn" class="btn btn-circle">
                                 <i class="fa fa-angle-double-down animated"></i>
@@ -188,10 +188,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <h2>iit bus booking</h2>
-                    <p>With two bus routes spread across Genoa, iit’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
-                    <p>With two bus routes spread across Genoa, iit’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
-                    <p>With two bus routes spread across Genoa, iit’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
+                    <h2>IIT bus booking</h2>
+                    <p>For over 10 years, IIT Bus Booking have been connecting people and Morego. Our fleet of motorcoaches add the latest in technology, safety and comfort. IIT Bus Booking is driving the future of motorcoach travel.</p>
+                    <p>With two bus routes spread across Genoa, IIT’s online bus reservation system is simpler and smarter. It provides you a simple way to choose your travel.</p>
                     <p>Enjoy your travel and thanks for choosing us.</p>
                 </div>
             </div>
@@ -227,7 +226,7 @@
  </body>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+$(document).ready(function() {
 $("#signup").click(function(e){
     e.preventDefault();
     $("#signupModal").css("visibility","visible");
@@ -262,95 +261,6 @@ $("#logout").click(function(e){
     });
 }); 
 
-//$('#form1').bootstrapValidator({
-//        message: 'This value is not valid',
-//        feedbackIcons: {
-//            valid: 'glyphicon glyphicon-ok',
-//            invalid: 'glyphicon glyphicon-remove',
-//            validating: 'glyphicon glyphicon-refresh'
-//        },
-//        fields: {
-//            name: {
-//                message: 'The username is not valid',
-//                validators: {
-//                    notEmpty: {
-//                        message: 'The username is required and cannot be empty'
-//                    },
-//                    stringLength: {
-//                        min: 1,
-//                        max: 30,
-//                        message: 'The username must be more than 6 and less than 30 characters long'
-//                    },
-//                    regexp: {
-//                        regexp: /^[a-zA-Z0-9_]+$/,
-//                        message: 'The username can only consist of alphabetical, number and underscore'
-//                    }
-//                }
-//            },
-//            email: {
-//                validators: {
-//                    notEmpty: {
-//                        message: 'The email is required and cannot be empty'
-//                    },
-//                    emailAddress: {
-//                        message: 'The input is not a valid email address'
-//                    }
-//                }
-//            }
-//        }
-//    });
-//
-//
-//$('#sig').click(function(e){
-//    e.preventDefault();
-//    $.ajax({
-//        type: "POST",
-//        url: "verify.php",
-//        data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
-//        success: function(response){ 
-//            response= response.replace(/\s+/g, '');
-//            alert(response);
-//            if(response.localeCompare("true")===0)
-//            {
-//                bootbox.alert("Signup success!", function(){
-//                location.href="index.php";
-//                });
-//            }
-//            else
-//            {
-//                bootbox.alert("User already signed!", function(){
-//                location.href="index.php";
-//                });
-//            }
-//            }
-//        });
-//    });
-    
-//$('#form1').submit(function(e){
-//    e.preventDefault();
-//    $.ajax({
-//        type: "POST",
-//        url: "verify.php",
-//        data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
-//        success: function(response){ 
-//            response= response.replace(/\s+/g, '');
-//            alert(response);
-//            if(response.localeCompare("true")===0)
-//            {
-//                bootbox.alert("Signup success!", function(){
-//                location.href="index.php";
-//                });
-//            }
-//            else
-//            {
-//                bootbox.alert("User already signed!", function(){
-//                location.href="index.php";
-//                });
-//            }
-//            }
-//        });
-//    }); 
-
 $("#form1").validate({
     rules: {
         "email": {
@@ -383,16 +293,15 @@ $("#form1").validate({
                     data: "name=" + $("#name").val()+"&surname="+ $("#surname").val()+"&email="+ $("#email").val()+"&psw="+ $("#psw").val(),
                     success: function(response){ 
                         response= response.replace(/\s+/g, '');
-                        alert(response);
                         if(response.localeCompare("true")===0)
                         {
-                            bootbox.alert("Signup success!", function(){
+                            bootbox.alert("You are now signed up!", function(){
                             location.href="index.php";
                             });
                         }
                         else
                         {
-                            bootbox.alert("User already signed!", function(){
+                            bootbox.alert("User already signed up!", function(){
                             location.href="index.php";
                             });
                         }
@@ -415,7 +324,7 @@ $('#form2').submit(function(e){
                     
             if(response.localeCompare("true")===0)
             {
-                bootbox.alert("Login success!", function(){
+                bootbox.alert("You are now logged in!", function(){
                 location.href="index.php";
                 });
             }

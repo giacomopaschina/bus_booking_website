@@ -103,7 +103,7 @@
                                  <input  type="date"   class="btn-lg btn-block btn  btn-primary " style="visibility: hidden;"   id="date">
                                  <br>
                                  <div>
-                                     <input type="submit" id="book_btn" value="Search"  class="btn btn-primary btn-lg btn-block">
+                                     <input type="submit" id="book_btn" value="Search" style="visibility: hidden"  class="btn btn-primary btn-lg btn-block">
                                  </div>
                             </div>
                         </div>
@@ -138,6 +138,8 @@
 
 </body>
 <script type="text/javascript">
+$(document).ready(function() {
+
 $("#signup").click(function(e){
     e.preventDefault();
     $("#signupModal").css("visibility","visible");
@@ -171,18 +173,18 @@ $("#logout").click(function(e){
     });
 }); 
         
-  //     $("#form2").ajaxForm({url: 'login.php', type: 'post'});
-  window.onload = function (){
       var mydiv = document.getElementById("timetables");
       var curr_height= parseInt(mydiv.offsetHeight); // removes the "px" at the end
       $("#busdiv").css({height: curr_height +'px'});
-  };
+  
 
   $('#direction').change(function(){
       var index=$("#direction option:selected").index();
       if(index===0)
       {
           $("#time").css("visibility","hidden");
+          $("#date").css("visibility","hidden");
+          $("#book_btn").css("visibility","hidden");
       }
       else
       {
@@ -208,6 +210,19 @@ $("#logout").click(function(e){
         else
         {
             $("#date").css("visibility","visible");
+        }
+    });
+    
+    $('#date').change(function(){
+        var value = document.getElementById('date').value;
+        var d=new Date();
+        if(value==="")
+        {
+            $("#book_btn").css("visibility","hidden");
+        }
+        else
+        {
+            $("#book_btn").css("visibility","visible");
         }
     });
     $('#formtime').submit(function(e){
@@ -246,7 +261,7 @@ $("#logout").click(function(e){
                 location.href="prenota.php";
                 });
         }
-        
+      
         $.ajax({
             type: "POST",
             url: "bus.php",
@@ -295,7 +310,8 @@ $("#logout").click(function(e){
                 
             }
         });
-    }); 
+    });
+});
 
 </script>
 </html>

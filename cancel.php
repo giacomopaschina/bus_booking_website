@@ -133,6 +133,7 @@
 
 </body>
 <script type="text/javascript">
+$(document).ready(function() {
 
 $("#logout").click(function(e){
     e.preventDefault();
@@ -150,11 +151,11 @@ $('#selseat').change(function(e){
     e.preventDefault();
     var index=$("#selseat option:selected").val();
     bootbox.dialog({
-                    message: "are you sure to delete this seat?",
-                    title: "Delete a seat",
+                    message: "Are you sure to delete this reservation?",
+                    title: "Cancel a reservation",
                     buttons: {
                         success: {
-                            label: "Delete!",
+                            label: "Cancel!",
                             className: "btn-success",
                             callback: function() {
                                   $.ajax({
@@ -173,6 +174,7 @@ $('#selseat').change(function(e){
                     }
                 }
             });
+});
 });
     
 </script>

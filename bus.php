@@ -1,6 +1,5 @@
 <?php
     session_start();
-//    require_once("comuni/header.php");
     require_once ("comuni/myconnect.php");
     
     if(!IsSet($_SESSION['name']))
@@ -8,7 +7,6 @@
 ?>
 
 <script type="text/javascript">
-//    alert("Per visualizzare questa pagina devi essere registrato!");
     location.href="index.php";
 </script>
 <?php
@@ -17,10 +15,6 @@
     $date = $_POST["date"];
     $index = $_POST["index"];
     $time = $_POST["time"];
-//    $date="2014-09-29";
-//    $index=1;
-//    $time=1;
-    
     $seat = array();
     
 
